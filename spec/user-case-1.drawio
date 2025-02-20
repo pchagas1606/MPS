@@ -1,0 +1,25 @@
+<mxfile host="65bd71144e">
+    <diagram name="Página-1" id="to-UZ2ayehd21Elz7MB6">
+        <mxGraphModel dx="777" dy="610" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="DnXi2XR4kEX6GWDYVTOZ-3" value="Administrador" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" parent="1" vertex="1">
+                    <mxGeometry x="189" y="510" width="40" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="DnXi2XR4kEX6GWDYVTOZ-9" value="" style="endArrow=classic;html=1;rounded=0;" parent="1" source="DnXi2XR4kEX6GWDYVTOZ-3" target="DnXi2XR4kEX6GWDYVTOZ-6" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="459" y="610" as="sourcePoint"/>
+                        <mxPoint x="509" y="560" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="2" value="Sistema de Gerenciamento de Rotinas" style="swimlane;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="259" y="390" width="361" height="350" as="geometry"/>
+                </mxCell>
+                <mxCell id="DnXi2XR4kEX6GWDYVTOZ-6" value="Manter Usuário" style="ellipse;whiteSpace=wrap;html=1;" parent="2" vertex="1">
+                    <mxGeometry x="130" y="130" width="120" height="60" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
