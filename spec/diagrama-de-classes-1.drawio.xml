@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36" version="26.0.15">
+  <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
+    <mxGraphModel dx="1050" dy="522" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="WIyWlLk6GJQsqaUBKTNV-0" />
+        <mxCell id="WIyWlLk6GJQsqaUBKTNV-1" parent="WIyWlLk6GJQsqaUBKTNV-0" />
+        <mxCell id="UboCkrVSBeRbZMbtpKym-7" value="«boundary&lt;span style=&quot;background-color: initial;&quot;&gt;»&lt;/span&gt;&lt;div&gt;&lt;b&gt;AdminBackOffice&lt;/b&gt;&lt;/div&gt;" style="html=1;whiteSpace=wrap;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="70" y="200" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="UboCkrVSBeRbZMbtpKym-8" value="«controll&lt;span style=&quot;background-color: initial;&quot;&gt;»&lt;/span&gt;&lt;div&gt;&lt;b&gt;AdminController&lt;/b&gt;&lt;/div&gt;" style="html=1;whiteSpace=wrap;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="324" y="200" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="UboCkrVSBeRbZMbtpKym-9" value="«entity&lt;span style=&quot;background-color: initial;&quot;&gt;»&lt;/span&gt;&lt;div&gt;&lt;b&gt;User&lt;/b&gt;&lt;/div&gt;" style="html=1;whiteSpace=wrap;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="570" y="200" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="UboCkrVSBeRbZMbtpKym-15" value="" style="endArrow=none;html=1;edgeStyle=orthogonalEdgeStyle;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="UboCkrVSBeRbZMbtpKym-7" target="UboCkrVSBeRbZMbtpKym-8" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="190" y="330" as="sourcePoint" />
+            <mxPoint x="350" y="330" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="UboCkrVSBeRbZMbtpKym-18" value="" style="endArrow=none;html=1;edgeStyle=orthogonalEdgeStyle;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" target="UboCkrVSBeRbZMbtpKym-9" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="434" y="224.8" as="sourcePoint" />
+            <mxPoint x="578" y="224.8" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
