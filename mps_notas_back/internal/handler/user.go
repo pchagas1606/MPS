@@ -71,8 +71,13 @@ func (h *UserHandler) CreateUser(w http.ResponseWriter, r *http.Request) {
 	//     return
 	// }
 	
-	user := h.userService.CreateUser(input)
-	
+	user, err := h.userService.CreateUser(input)
+	if err != nil {
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusInternalServerError)
+		json.NewEncoder(w).Encode(map[string]string{"error": "Error while trying to process the entity!"})
+		return
+	}
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusCreated)
 	json.NewEncoder(w).Encode(user)

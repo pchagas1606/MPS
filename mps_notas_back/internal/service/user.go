@@ -28,11 +28,10 @@ func (s *UserService) GetUserByID(id int) *model.User {
 }
 
 // CreateUser cria um novo usuário
-func (s *UserService) CreateUser(input model.NewUserInput) model.User {
+func (s *UserService) CreateUser(input model.NewUserInput) (model.User, error) {
 	// Aqui poderia haver validações adicionais, prox atividade
 	// if input.Name == "" || input.Email == "" {
 	//     throw error
 	// }
-	
 	return s.repo.Create(input)
 }

@@ -2,6 +2,7 @@ package repository
 
 import (
 	"mps_notas_back/internal/model"
+	"mps_notas_back/internal/security"
 	"sync"
 	"time"
 )
@@ -25,7 +26,7 @@ func NewUserRepository() *UserRepository {
 func (r *UserRepository) FindAll() []model.User {
 	r.mutex.RLock()
 	defer r.mutex.RUnlock()
-	
+
 	// Cria uma cópia da slice para evitar problemas de concorrência
 	result := make([]model.User, len(r.users))
 	copy(result, r.users)
@@ -36,7 +37,7 @@ func (r *UserRepository) FindAll() []model.User {
 func (r *UserRepository) FindByID(id int) *model.User {
 	r.mutex.RLock()
 	defer r.mutex.RUnlock()
-	
+
 	for i, user := range r.users {
 		if user.ID == id {
 			// Retorna uma cópia para evitar problemas de concorrência
@@ -48,18 +49,22 @@ func (r *UserRepository) FindByID(id int) *model.User {
 }
 
 // Create adiciona um novo usuário e retorna o usuário criado, usando mutex para garantir a concorrência
-func (r *UserRepository) Create(input model.NewUserInput) model.User {
+func (r *UserRepository) Create(input model.NewUserInput) (model.User, error) {
 	r.mutex.Lock()
 	defer r.mutex.Unlock()
-	
-	user := model.User{
-		ID:        r.currentID,
-		Name:      input.Name,
-		Email:     input.Email,
-		CreatedAt: time.Now(),
+	hashed_password, err := security.Hash(input.Password)
+	if err != nil {
+		return model.User{}, err
 	}
-	
+	user := model.User{
+		ID:            r.currentID,
+		Name:          input.Name,
+		Email:         input.Email,
+		Password_Hash: string(hashed_password),
+		CreatedAt:     time.Now(),
+	}
+
 	r.currentID++
 	r.users = append(r.users, user)
-	return user
+	return user, nil
 }
