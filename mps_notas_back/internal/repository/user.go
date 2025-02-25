@@ -48,6 +48,21 @@ func (r *UserRepository) FindByID(id int) *model.User {
 	return nil
 }
 
+// FindByEmail retorna um usuário pelo Email ou nil se não for encontrado
+func (r *UserRepository) FindByEmail(email string) *model.User {
+	r.mutex.RLock()
+	defer r.mutex.RUnlock()
+
+	for i, user := range r.users {
+		if user.Email == email {
+			// Retorna uma cópia para evitar problemas de concorrência
+			userCopy := r.users[i]
+			return &userCopy
+		}
+	}
+	return nil
+}
+
 // Create adiciona um novo usuário e retorna o usuário criado, usando mutex para garantir a concorrência
 func (r *UserRepository) Create(input model.NewUserInput) (model.User, error) {
 	r.mutex.Lock()

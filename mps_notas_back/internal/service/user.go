@@ -1,8 +1,11 @@
 package service
 
 import (
+	"errors"
+	"mps_notas_back/internal/auth"
 	"mps_notas_back/internal/model"
 	"mps_notas_back/internal/repository"
+	"mps_notas_back/internal/security"
 )
 
 // UserService implementa a lógica de negócio relacionada aos usuários
@@ -34,4 +37,23 @@ func (s *UserService) CreateUser(input model.NewUserInput) (model.User, error) {
 	//     throw error
 	// }
 	return s.repo.Create(input)
+}
+
+// Login Recebe email e senha do usuario compara com o hash salvo se forem equivalentes retorna um token para o uso da API
+func (s *UserService) Login(input model.AuthUserInput) (model.Token, error) {
+
+	user := s.repo.FindByEmail(input.Email)
+	if user == nil {
+		return model.Token{}, errors.New("user does not exists")
+	}
+	// Verifica se a senha recebica equivale ao hash
+	if err := security.VerifyPassword(input.Password, user.Password_Hash); err != nil {
+		return model.Token{}, err
+	}
+	// Gera o token
+	t, err := auth.CreateToken(user.ID)
+	if err != nil {
+		return model.Token{}, err
+	}
+	return model.Token{Token: t}, nil
 }

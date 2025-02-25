@@ -17,3 +17,8 @@ type NewUserInput struct {
 	Email string `json:"email"`
 	Password string `json:"password"`
 }
+// AuthUserInput representa a requisição do usuario parar se autenticar
+type AuthUserInput struct {
+	Email string `json:"email"`
+	Password string `json:"password"`
+}

@@ -1,5 +1,8 @@
 package config
 
+// SecretKey é a chave usada pela API para assinar o token
+var SecretKey = []byte("SECRET_KEY")
+
 // Config armazena as configurações da aplicação
 type Config struct {
 	Port           int

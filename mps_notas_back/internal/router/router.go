@@ -25,6 +25,7 @@ func New(userService *service.UserService) http.Handler {
 	mux.HandleFunc("GET /api/users", userHandler.GetAllUsers)
 	mux.HandleFunc("GET /api/users/{id}", userHandler.GetUserByID)
 	mux.HandleFunc("POST /api/users", userHandler.CreateUser)
+	mux.HandleFunc("POST /api/login", userHandler.Login)
 	
 	return mux
 }
