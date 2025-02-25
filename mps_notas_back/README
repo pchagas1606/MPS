@@ -1,0 +1,71 @@
+# MPS Notas Backend
+
+API REST em Go para gerenciamento de usuários.
+
+## Tecnologias
+
+- Go 1.24
+- Docker (Opcional)
+- Air (hot reload)
+
+## Configuração
+
+O projeto utiliza as seguintes portas por padrão (CORS DESABILITADO):
+
+| Serviço                   | Porta |
+| ------------------------- | ----- |
+| API                       | 3000  |
+| Frontend (CORS permitido) | 3001  |
+
+## Como Executar
+
+### Desenvolvimento
+
+Para executar com hot reload:
+
+```bash
+make dev
+```
+
+### Produção
+
+Build e execução local:
+
+```bash
+make build
+make run
+```
+
+### Docker
+
+```bash
+make docker-build
+make docker-run
+```
+
+## API Endpoints
+
+### Usuários
+
+- `GET /api/users` - Lista todos os usuários
+- `GET /api/users/{id}` - Obtém usuário por ID
+- `POST /api/users` - Cria novo usuário
+
+### Monitoramento
+
+- `GET /health` - Healthcheck
+
+## TODO
+
+- Implementar OpenApi (Swagger)
+
+## 🔧 Comandos Make
+
+| Comando             | Descrição                |
+| ------------------- | ------------------------ |
+| `make build`        | Compila o projeto        |
+| `make run`          | Executa o binário        |
+| `make dev`          | Executa com hot reload   |
+| `make clean`        | Remove binários          |
+| `make docker-build` | Build da imagem Docker   |
+| `make docker-run`   | Executa container Docker |
