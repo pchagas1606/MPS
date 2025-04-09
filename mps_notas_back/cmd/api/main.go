@@ -3,11 +3,12 @@ package main
 import (
 	"fmt"
 	"log"
-	"mps_notas_back/internal/config"
-	"mps_notas_back/internal/middleware"
-	"mps_notas_back/internal/repository"
-	"mps_notas_back/internal/router"
-	"mps_notas_back/internal/service"
+	"mps_notas_back/internal/buisness/config"
+	"mps_notas_back/internal/buisness/middleware"
+	"mps_notas_back/internal/buisness/router"
+	"mps_notas_back/internal/buisness/service"
+	"mps_notas_back/internal/infra/repository"
+
 	"net/http"
 )
 

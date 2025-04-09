@@ -2,10 +2,11 @@ package service
 
 import (
 	"errors"
-	"mps_notas_back/internal/auth"
-	"mps_notas_back/internal/model"
-	"mps_notas_back/internal/repository"
-	"mps_notas_back/internal/security"
+	"mps_notas_back/internal/buisness/auth"
+
+	"mps_notas_back/internal/buisness/security"
+	"mps_notas_back/internal/infra/model"
+	"mps_notas_back/internal/infra/repository"
 )
 
 // UserService implementa a lógica de negócio relacionada aos usuários
@@ -21,17 +22,17 @@ func NewUserService(repo *repository.UserRepository) *UserService {
 }
 
 // GetAllUsers retorna todos os usuários
-func (s *UserService) GetAllUsers() []model.User {
+func (s *UserService) GetAllUsers() []model.UserDAO {
 	return s.repo.FindAll()
 }
 
 // GetUserByID retorna um usuário pelo ID
-func (s *UserService) GetUserByID(id int) *model.User {
+func (s *UserService) GetUserByID(id int) *model.UserDAO {
 	return s.repo.FindByID(id)
 }
 
 // CreateUser cria um novo usuário
-func (s *UserService) CreateUser(input model.NewUserInput) (model.User, error) {
+func (s *UserService) CreateUser(input model.NewUserInput) (model.UserDAO, error) {
 	// Aqui poderia haver validações adicionais, prox atividade
 	// if input.Name == "" || input.Email == "" {
 	//     throw error

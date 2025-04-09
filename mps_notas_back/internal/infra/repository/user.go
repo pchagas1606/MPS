@@ -1,15 +1,15 @@
 package repository
 
 import (
-	"mps_notas_back/internal/model"
-	"mps_notas_back/internal/security"
+	"mps_notas_back/internal/buisness/security"
+	"mps_notas_back/internal/infra/model"
 	"sync"
 	"time"
 )
 
 // UserRepository implementa o acesso aos dados dos usuários
 type UserRepository struct {
-	users     []model.User
+	users     []model.UserDAO
 	currentID int
 	mutex     sync.RWMutex
 }
@@ -17,24 +17,24 @@ type UserRepository struct {
 // NewUserRepository cria uma nova instância do repositório de usuários
 func NewUserRepository() *UserRepository {
 	return &UserRepository{
-		users:     []model.User{},
+		users:     []model.UserDAO{},
 		currentID: 1,
 	}
 }
 
 // FindAll retorna todos os usuários
-func (r *UserRepository) FindAll() []model.User {
+func (r *UserRepository) FindAll() []model.UserDAO {
 	r.mutex.RLock()
 	defer r.mutex.RUnlock()
 
 	// Cria uma cópia da slice para evitar problemas de concorrência
-	result := make([]model.User, len(r.users))
+	result := make([]model.UserDAO, len(r.users))
 	copy(result, r.users)
 	return result
 }
 
 // FindByID retorna um usuário pelo ID ou nil se não for encontrado
-func (r *UserRepository) FindByID(id int) *model.User {
+func (r *UserRepository) FindByID(id int) *model.UserDAO {
 	r.mutex.RLock()
 	defer r.mutex.RUnlock()
 
@@ -49,7 +49,7 @@ func (r *UserRepository) FindByID(id int) *model.User {
 }
 
 // FindByEmail retorna um usuário pelo Email ou nil se não for encontrado
-func (r *UserRepository) FindByEmail(email string) *model.User {
+func (r *UserRepository) FindByEmail(email string) *model.UserDAO {
 	r.mutex.RLock()
 	defer r.mutex.RUnlock()
 
@@ -64,14 +64,14 @@ func (r *UserRepository) FindByEmail(email string) *model.User {
 }
 
 // Create adiciona um novo usuário e retorna o usuário criado, usando mutex para garantir a concorrência
-func (r *UserRepository) Create(input model.NewUserInput) (model.User, error) {
+func (r *UserRepository) Create(input model.NewUserInput) (model.UserDAO, error) {
 	r.mutex.Lock()
 	defer r.mutex.Unlock()
 	hashed_password, err := security.Hash(input.Password)
 	if err != nil {
-		return model.User{}, err
+		return model.UserDAO{}, err
 	}
-	user := model.User{
+	user := model.UserDAO{
 		ID:            r.currentID,
 		Name:          input.Name,
 		Email:         input.Email,

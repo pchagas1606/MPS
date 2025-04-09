@@ -3,7 +3,7 @@ package auth
 import (
 	"errors"
 	"fmt"
-	"mps_notas_back/internal/config"
+	"mps_notas_back/internal/buisness/config"
 	"net/http"
 	"strconv"
 	"strings"

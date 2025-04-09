@@ -3,7 +3,7 @@ package model
 import "time"
 
 // User define a estrutura de dados do usuário
-type User struct {
+type UserDAO struct {
 	ID            int       `json:"id"`    // Identificador único do usuário
 	Name          string    `json:"name"`  // Nome do usuário
 	Email         string    `json:"email"` // Email do usuário

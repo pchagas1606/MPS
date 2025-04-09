@@ -2,10 +2,10 @@ package handler
 
 import (
 	"encoding/json"
-	"mps_notas_back/internal/model"
-	"mps_notas_back/internal/service"
+	"mps_notas_back/internal/infra/model"
 	"net/http"
 	"strconv"
+	"mps_notas_back/internal/buisness/service"
 )
 
 // UserHandler lida com as requisições HTTP relacionadas a usuários
@@ -23,7 +23,7 @@ func NewUserHandler(userService *service.UserService) *UserHandler {
 // GetAllUsers retorna todos os usuários
 func (h *UserHandler) GetAllUsers(w http.ResponseWriter, r *http.Request) {
 	users := h.userService.GetAllUsers()
-	
+
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(users)
 }
@@ -37,7 +37,7 @@ func (h *UserHandler) GetUserByID(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "ID inválido", http.StatusBadRequest)
 		return
 	}
-	
+
 	user := h.userService.GetUserByID(id)
 	if user == nil {
 		w.Header().Set("Content-Type", "application/json")
@@ -45,7 +45,7 @@ func (h *UserHandler) GetUserByID(w http.ResponseWriter, r *http.Request) {
 		json.NewEncoder(w).Encode(map[string]string{"error": "User not found"})
 		return
 	}
-	
+
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(user)
 }
@@ -53,7 +53,7 @@ func (h *UserHandler) GetUserByID(w http.ResponseWriter, r *http.Request) {
 // CreateUser cria um novo usuário
 func (h *UserHandler) CreateUser(w http.ResponseWriter, r *http.Request) {
 	var input model.NewUserInput
-	
+
 	// Decodificar corpo da requisição
 	err := json.NewDecoder(r.Body).Decode(&input)
 	if err != nil {
@@ -62,7 +62,7 @@ func (h *UserHandler) CreateUser(w http.ResponseWriter, r *http.Request) {
 		json.NewEncoder(w).Encode(map[string]string{"error": "Invalid request body"})
 		return
 	}
-	
+
 	// Validação básica, prox atividade
 	// if input.Name == "" || input.Email == "" {
 	//     w.Header().Set("Content-Type", "application/json")
@@ -70,7 +70,7 @@ func (h *UserHandler) CreateUser(w http.ResponseWriter, r *http.Request) {
 	//     json.NewEncoder(w).Encode(map[string]string{"error": "Name and email are required"})
 	//     return
 	// }
-	
+
 	user, err := h.userService.CreateUser(input)
 	if err != nil {
 		w.Header().Set("Content-Type", "application/json")
@@ -86,7 +86,7 @@ func (h *UserHandler) CreateUser(w http.ResponseWriter, r *http.Request) {
 // Login autentica um usuario na API e retorna um token
 func (h *UserHandler) Login(w http.ResponseWriter, r *http.Request) {
 	var input model.AuthUserInput
-	
+
 	// Decodificar corpo da requisição
 	err := json.NewDecoder(r.Body).Decode(&input)
 	if err != nil {
