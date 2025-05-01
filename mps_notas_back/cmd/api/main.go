@@ -8,7 +8,7 @@ import (
 	"mps_notas_back/internal/buisness/router"
 	"mps_notas_back/internal/buisness/service"
 	"mps_notas_back/internal/infra/database"
-	"mps_notas_back/internal/infra/factory"
+	"mps_notas_back/internal/infra/Factory"
 
 	"net/http"
 )
