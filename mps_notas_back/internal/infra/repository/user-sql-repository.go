@@ -23,7 +23,7 @@ var userQueries = map[string]string{
 
 	"findById": " SELECT id, name ,email, created_at FROM users u WHERE u.id = ? ",
 
-	"findByEmail": " SELECT id, name ,email, created_at FROM users u WHERE u.email = ? ",
+	"findByEmail": " SELECT id, name ,email, password_hash, created_at FROM users u WHERE u.email = ? ",
 }
 
 func (u UserRepositorySql) FindAll() ([]model.UserDAO, error) {
@@ -72,7 +72,7 @@ func (u UserRepositorySql) FindByEmail(email string) (*model.UserDAO, error) {
 	defer rows.Close()
 	var user model.UserDAO
 	if rows.Next() {
-		if err := rows.Scan(&user.ID, &user.Name, &user.Email, &user.CreatedAt); err != nil {
+		if err := rows.Scan(&user.ID, &user.Name, &user.Email, &user.Password_Hash,&user.CreatedAt); err != nil {
 			return &model.UserDAO{}, err
 		}
 	}
