@@ -31,5 +31,10 @@ func GenTaskRoutes(f facade.Facade) []Route {
 			Func:        f.GetAllTasks,
 			RequireAuth: true,
 		},
+		{
+			URI:         "POST /api/tasks/{id}/undo",
+			Func:        f.UndoTaskUpdate,
+			RequireAuth: true,
+		},
 	}
 }

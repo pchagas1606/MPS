@@ -24,7 +24,7 @@ func NewTaskHandler(taskService *service.TaskService) *TaskHandler {
 func (h *TaskHandler) GetAllTasks(w http.ResponseWriter, r *http.Request) {
 	tasks, err := h.taskService.GetAllTask()
 	if err != nil {
-		http.Error(w, "Error Interno"+ err.Error(), http.StatusInternalServerError)
+		http.Error(w, "Error Interno"+err.Error(), http.StatusInternalServerError)
 		return
 	}
 
@@ -131,4 +131,22 @@ func (h *TaskHandler) DeleteTask(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(map[string]string{"message": "task Deleted Successfully"})
+}
+
+func (h *TaskHandler) UndoTaskUpdate(w http.ResponseWriter, r *http.Request) {
+	idParam := r.PathValue("id")
+	id, err := strconv.Atoi(idParam)
+	if err != nil {
+		http.Error(w, "Invalid ID", http.StatusBadRequest)
+		return
+	}
+
+	task, err := h.taskService.UndoLastUpdate(id)
+	if err != nil {
+		http.Error(w, "Undo failed: "+err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(task)
 }
