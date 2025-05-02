@@ -9,6 +9,7 @@ import {
 } from "../api/tasks";
 import { getAllUsers, createUser } from "../api/users";
 import { checkHealth } from "../api/health";
+import { checkStatus } from "../api/status";
 
 export async function mainMenu() {
   while (true) {
@@ -27,6 +28,7 @@ export async function mainMenu() {
           "👤 View Users",
           "➕ Create User",
           "❤️ Check API Health",
+          "🔧 Check Server Status",
           "🚪 Logout",
         ],
       },
@@ -110,6 +112,10 @@ export async function mainMenu() {
       case "❤️ Check API Health":
         const health = await checkHealth();
         console.log("✅ API Health:", health);
+        break;
+      case "🔧 Check Server Status":
+        const serverStatus = await checkStatus();
+        console.log("✅ Server Status:", serverStatus);
         break;
       case "🚪 Logout":
         return;

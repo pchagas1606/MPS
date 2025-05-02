@@ -2,6 +2,7 @@ package facade
 
 import (
 	"mps_notas_back/internal/buisness/service"
+	"mps_notas_back/internal/cmd"
 	"mps_notas_back/internal/facade/handler"
 	"net/http"
 )
@@ -9,7 +10,7 @@ import (
 // Facade é função
 type Facade interface {
 	// GetFacade
-	GetFacade(userService *service.UserService, taskService *service.TaskService) Facade
+	GetFacade(userService *service.UserService, taskService *service.TaskService, statusService *cmd.GetStatusCommand) Facade
 
 	//Task Methods
 
@@ -29,17 +30,22 @@ type Facade interface {
 	Delete(w http.ResponseWriter, r *http.Request)
 	Login(w http.ResponseWriter, r *http.Request)
 	GenerateReport(w http.ResponseWriter, r *http.Request)
+
+	// Status methods
+	GetStatus(w http.ResponseWriter, r *http.Request)
 }
 type FacadeImpl struct {
 	Facade
-	task handler.TaskHandler
-	user handler.UserHandler
+	task   handler.TaskHandler
+	user   handler.UserHandler
+	status handler.StatusHandler
 }
 
-func (FacadeImpl) GetFacade(userService *service.UserService, taskService *service.TaskService) Facade {
+func (FacadeImpl) GetFacade(userService *service.UserService, taskService *service.TaskService, statusService *cmd.GetStatusCommand) Facade {
 	return &FacadeImpl{
-		task: *handler.NewTaskHandler(taskService),
-		user: *handler.NewUserHandler(userService),
+		task:   *handler.NewTaskHandler(taskService),
+		user:   *handler.NewUserHandler(userService),
+		status: *handler.NewStatusHandler(statusService),
 	}
 }
 
@@ -70,4 +76,8 @@ func (f FacadeImpl) GenerateReport(w http.ResponseWriter, r *http.Request) {
 }
 func (f FacadeImpl) UndoTaskUpdate(w http.ResponseWriter, r *http.Request) {
 	f.task.UndoTaskUpdate(w, r)
+}
+
+func (f FacadeImpl) GetStatus(w http.ResponseWriter, r *http.Request) {
+	f.status.ServeHTTP(w, r)
 }

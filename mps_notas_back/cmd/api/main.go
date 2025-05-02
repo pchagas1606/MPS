@@ -7,8 +7,9 @@ import (
 	"mps_notas_back/internal/buisness/middleware"
 	"mps_notas_back/internal/buisness/router"
 	"mps_notas_back/internal/buisness/service"
+	"mps_notas_back/internal/cmd"
+	factory "mps_notas_back/internal/infra/Factory"
 	"mps_notas_back/internal/infra/database"
-	"mps_notas_back/internal/infra/Factory"
 
 	"net/http"
 )
@@ -27,9 +28,12 @@ func main() {
 	// Inicializar serviços
 	userService := service.NewUserService(userRepo)
 	taskService := service.NewTaskService(taskRepo)
+	statusService := service.NewStatusService()
+	// Inicializar comando de status
+	statusCommand := cmd.NewGetStatusCommand(statusService)
 
 	// Configurar router
-	r := router.New(userService, taskService)
+	r := router.New(userService, taskService, statusCommand)
 
 	// Aplicar middlewares, desativado CORS por enquanto, pois não há mais necessidade
 	//corsConfig := middleware.DefaultCORSConfig()

@@ -4,8 +4,6 @@ import (
 	"mps_notas_back/internal/buisness/middlewares"
 	"mps_notas_back/internal/facade"
 	"net/http"
-
-
 )
 
 // Route are a struct that represents all routes of API
@@ -19,6 +17,7 @@ type Route struct {
 func ConfigRoutes(r *http.ServeMux, f facade.Facade) http.Handler {
 	routes := GenUserRoutes(f)
 	routes = append(routes, GenTaskRoutes(f)...)
+	routes = append(routes, GenStatusRoutes(f)...)
 
 	for _, route := range routes {
 		if route.RequireAuth {

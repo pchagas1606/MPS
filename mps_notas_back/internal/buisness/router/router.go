@@ -3,15 +3,16 @@ package router
 import (
 	"mps_notas_back/internal/buisness/router/routes"
 	"mps_notas_back/internal/buisness/service"
+	"mps_notas_back/internal/cmd"
 	"mps_notas_back/internal/facade"
 	"net/http"
 )
 
 // New configura e retorna um novo router HTTP
-func New(userService *service.UserService, taskService *service.TaskService) http.Handler {
+func New(userService *service.UserService, taskService *service.TaskService, statusService *cmd.GetStatusCommand) http.Handler {
 
 	//Fachada para as funções que lidam com o handle das chamadas.
-	facadeImpl := facade.FacadeImpl.GetFacade(facade.FacadeImpl{}, userService, taskService)
+	facadeImpl := facade.FacadeImpl.GetFacade(facade.FacadeImpl{}, userService, taskService, statusService)
 
 	// Criar mux (multiplexador de rotas)
 	mux := http.NewServeMux()
