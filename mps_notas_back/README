@@ -55,9 +55,13 @@ make docker-run
 
 - `GET /health` - Healthcheck
 
-## TODO
+## Como executar a interface cmd
 
-- Implementar OpenApi (Swagger)
+```bash
+cd terminal-ui
+npm install
+npx ts-node .\src\main.ts
+```
 
 ## 🔧 Comandos Make
 
